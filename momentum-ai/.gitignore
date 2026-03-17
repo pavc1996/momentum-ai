@@ -1,0 +1,4 @@
+node_modules/
+leads.db
+leads.log
+*.db
