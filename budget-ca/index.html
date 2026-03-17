@@ -151,6 +151,7 @@
   <div class="nav-tab" onclick="showPage('debts')" id="tab-debts">💳 Debts</div>
   <div class="nav-tab" onclick="showPage('goals')" id="tab-goals">🎯 Goals</div>
   <div class="nav-tab" onclick="showPage('tax')" id="tab-tax">🇨🇦 Tax</div>
+  <div class="nav-tab" onclick="showPage('tips')" id="tab-tips">💡 Tips</div>
   <div class="nav-right">
     <div class="province-badge" id="province-badge" onclick="showPage('settings')">ON</div>
   </div>
@@ -410,6 +411,13 @@
   </div>
 </div>
 
+<!-- TIPS -->
+<div class="page" id="page-tips">
+  <h2>💡 Canadian Financial Tips</h2>
+  <p class="page-sub">Personalized advice based on your financial profile — TFSA, RRSP, FHSA, debt payoff, tax optimization</p>
+  <div id="tips-list"><div class="empty">Loading tips...</div></div>
+</div>
+
 <!-- SETTINGS -->
 <div class="page" id="page-settings">
   <h2>Settings</h2>
@@ -475,6 +483,7 @@ function showPage(name) {
   if (name === 'accounts')   loadAccounts();
   if (name === 'debts')      loadDebts();
   if (name === 'goals')      loadGoals();
+  if (name === 'tips')       loadTips();
   if (name === 'settings')   loadSettings();
 }
 
@@ -930,6 +939,27 @@ async function saveProfile() {
   });
   document.getElementById('province-badge').textContent = document.getElementById('set-province').value;
   alert('Profile saved!');
+}
+
+// ── TIPS ───────────────────────────────────────────────────────────────
+async function loadTips() {
+  const tips = await api('GET', '/api/tips');
+  const priorityColor = { high: 'red', medium: 'yellow', low: 'green' };
+  const priorityLabel = { high: '🔴 High Priority', medium: '🟡 Good to Know', low: '🟢 Optimization' };
+  if (!tips.length) {
+    document.getElementById('tips-list').innerHTML = '<div class="tip-box">Add your income, expenses, and accounts to get personalized Canadian financial tips!</div>';
+    return;
+  }
+  document.getElementById('tips-list').innerHTML = tips.map(t => `
+    <div class="card" style="margin-bottom:16px;border-left:3px solid var(--${priorityColor[t.priority]||'accent'});">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+        <div style="font-size:1rem;font-weight:700;">${t.title}</div>
+        <span class="badge badge-${t.priority==='high'?'red':t.priority==='medium'?'yellow':'green'}" style="white-space:nowrap;margin-left:12px;">${priorityLabel[t.priority]}</span>
+      </div>
+      <p style="font-size:13px;line-height:1.7;color:#cbd5e1;margin-bottom:10px;">${t.body}</p>
+      <div style="font-size:12px;color:var(--accent);font-weight:600;">→ ${t.action}</div>
+    </div>
+  `).join('');
 }
 
 // ── INIT ───────────────────────────────────────────────────────────────

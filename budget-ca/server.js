@@ -2,13 +2,13 @@ const express = require('express');
 const Database = require('better-sqlite3');
 const cors = require('cors');
 const path = require('path');
+const { generateTips } = require('./tips');
 
 const app = express();
 const PORT = 8081;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname));
 
 const db = new Database(path.join(__dirname, 'budget.db'));
 
@@ -448,5 +448,30 @@ app.get('/api/summary', (req, res) => {
     debtToIncomeRatio:  annualIncome > 0 ? Math.round((totalDebt / annualIncome) * 100) / 100 : 0
   });
 });
+
+// Tips endpoint
+app.get('/api/tips', (req, res) => {
+  const profile = db.prepare('SELECT * FROM profiles WHERE id=1').get();
+  const income = db.prepare('SELECT * FROM income WHERE profile_id=1').all();
+  const expenses = db.prepare('SELECT * FROM expenses WHERE profile_id=1').all();
+  const accounts = db.prepare('SELECT * FROM accounts WHERE profile_id=1').all();
+  const debts = db.prepare('SELECT * FROM debts WHERE profile_id=1').all();
+  const goals = db.prepare('SELECT * FROM goals WHERE profile_id=1').all();
+  const toMonthly = (a, f) => f==='weekly'?a*52/12:f==='biweekly'?a*26/12:f==='annually'?a/12:a;
+  const monthlyIncome = income.reduce((s,i) => s+toMonthly(i.amount,i.frequency),0);
+  const annualIncome = monthlyIncome * 12;
+  const monthlyExpenses = expenses.reduce((s,e) => s+toMonthly(e.amount,e.frequency),0);
+  const totalDebt = debts.reduce((s,d) => s+d.balance,0);
+  const totalSavings = accounts.reduce((s,a) => s+a.balance,0);
+  const monthlyDebt = debts.reduce((s,d) => s+d.minimum_payment,0);
+  const taxInfo = calcTax(annualIncome, profile.province);
+  const monthlyNet = taxInfo.netMonthly;
+  const monthlySurplus = monthlyNet - monthlyExpenses - monthlyDebt;
+  const summary = { profile, monthlyNetIncome: monthlyNet, monthlyExpenses, monthlySurplus, totalSavings, totalDebt, netWorth: totalSavings - totalDebt, taxInfo, goals, debtToIncomeRatio: annualIncome > 0 ? totalDebt/annualIncome : 0 };
+  res.json(generateTips(summary));
+});
+
+// Serve static files AFTER API routes so express.static doesn't intercept /api/*
+app.use(express.static(__dirname));
 
 app.listen(PORT, () => console.log(`Budget CA running at http://localhost:${PORT}`));
