@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Budget — Momentum AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface2: #1a1a26;
+      --border: #2a2a3d;
+      --purple: #7c3aed;
+      --purple-light: #9d5ff5;
+      --purple-dim: #3d1a78;
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .logo { font-weight: 900; font-size: 1.2rem; } .logo span { color: var(--purple-light); }
+    nav ul { display: flex; list-style: none; gap: 1.5rem; }
+    nav ul a { color: var(--text-muted); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    nav ul a:hover, nav ul a.active { color: var(--text); }
+    .layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 60px); }
+    .sidebar { background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 0; }
+    .sidebar-item { display: flex; align-items: center; gap: .75rem; padding: .75rem 1.5rem; cursor: pointer; color: var(--text-muted); font-size: .9rem; transition: all .2s; border-left: 3px solid transparent; }
+    .sidebar-item:hover { color: var(--text); background: var(--surface2); }
+    .sidebar-item.active { color: var(--purple-light); border-left-color: var(--purple); background: var(--surface2); }
+    .sidebar-item .icon { font-size: 1.1rem; }
+    .main { padding: 2rem; overflow-y: auto; }
+    .page { display: none; } .page.active { display: block; }
+    h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: .25rem; }
+    .subtitle { color: var(--text-muted); font-size: .9rem; margin-bottom: 1.5rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+    .stat-card .label { font-size: .75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .5rem; }
+    .stat-card .value { font-size: 1.6rem; font-weight: 700; }
+    .stat-card .value.green { color: var(--green); }
+    .stat-card .value.red { color: var(--red); }
+    .stat-card .value.purple { color: var(--purple-light); }
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+    .chart-card h3 { font-size: .9rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .card-header h3 { font-size: 1rem; font-weight: 600; }
+    .btn { padding: .5rem 1rem; border-radius: 8px; border: none; cursor: pointer; font-size: .85rem; font-weight: 500; transition: all .2s; }
+    .btn-primary { background: var(--purple); color: #fff; }
+    .btn-primary:hover { background: var(--purple-light); }
+    .btn-sm { padding: .3rem .6rem; font-size: .75rem; }
+    .btn-danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
+    .btn-danger:hover { background: var(--red); color: #fff; }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--purple); color: var(--purple-light); }
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    th { text-align: left; padding: .6rem .75rem; color: var(--text-muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--border); }
+    td { padding: .7rem .75rem; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface2); }
+    .badge { display: inline-block; padding: .2rem .5rem; border-radius: 4px; font-size: .7rem; font-weight: 600; }
+    .badge-income { background: rgba(16,185,129,.15); color: var(--green); }
+    .badge-expense { background: rgba(239,68,68,.15); color: var(--red); }
+    .badge-type { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+    .progress-bar { background: var(--surface2); border-radius: 4px; height: 8px; overflow: hidden; margin-top: .4rem; }
+    .progress-fill { height: 100%; border-radius: 4px; transition: width .3s; }
+    .progress-ok { background: var(--green); }
+    .progress-warn { background: var(--yellow); }
+    .progress-over { background: var(--red); }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; width: 100%; max-width: 480px; }
+    .modal h2 { font-size: 1.1rem; margin-bottom: 1.25rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: .8rem; color: var(--text-muted); margin-bottom: .4rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: .6rem .75rem; color: var(--text); font-size: .9rem; outline: none; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--purple); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; margin-top: 1.25rem; }
+    .alert-due { color: var(--yellow); font-size: .75rem; }
+    .alert-overdue { color: var(--red); font-size: .75rem; }
+    .net-worth-big { font-size: 2.5rem; font-weight: 900; margin: .5rem 0; }
+    .month-nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .month-nav button { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: .4rem .8rem; border-radius: 8px; cursor: pointer; }
+    .month-label { font-weight: 600; min-width: 120px; text-align: center; }
+    .filter-row { display: flex; gap: .75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .filter-row select, .filter-row input { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: .4rem .75rem; color: var(--text); font-size: .85rem; outline: none; }
+    .empty { text-align: center; padding: 2rem; color: var(--text-muted); font-size: .9rem; }
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: flex; overflow-x: auto; padding: .5rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .sidebar-item { border-left: none; border-bottom: 3px solid transparent; padding: .5rem .75rem; white-space: nowrap; }
+      .sidebar-item.active { border-bottom-color: var(--purple); border-left: none; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Momentum<span>AI</span></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="crm.html">CRM</a></li>
+    <li><a href="admin.html">Leads</a></li>
+    <li><a href="budget.html" class="active">Budget</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-item active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</div>
+    <div class="sidebar-item" onclick="showPage('transactions')"><span class="icon">💳</span> Transactions</div>
+    <div class="sidebar-item" onclick="showPage('accounts')"><span class="icon">🏦</span> Accounts</div>
+    <div class="sidebar-item" onclick="showPage('budgets')"><span class="icon">🎯</span> Budgets</div>
+    <div class="sidebar-item" onclick="showPage('recurring')"><span class="icon">🔄</span> Recurring</div>
+  </div>
+
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <h1>Budget Overview</h1>
+      <p class="subtitle">Your Canadian financial snapshot</p>
+      <div class="stats-grid" id="dash-stats">
+        <div class="stat-card"><div class="label">Net Worth</div><div class="value purple" id="stat-networth">$0</div></div>
+        <div class="stat-card"><div class="label">Total Assets</div><div class="value green" id="stat-assets">$0</div></div>
+        <div class="stat-card"><div class="label">Total Debt</div><div class="value red" id="stat-debt">$0</div></div>
+        <div class="stat-card"><div class="label">Month Income</div><div class="value green" id="stat-income">$0</div></div>
+        <div class="stat-card"><div class="label">Month Expenses</div><div class="value red" id="stat-expenses">$0</div></div>
+        <div class="stat-card"><div class="label">Month Net</div><div class="value" id="stat-net">$0</div></div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3>Spending by Category</h3><canvas id="chart-category" height="200"></canvas></div>
+        <div class="chart-card"><h3>Monthly Trend (6mo)</h3><canvas id="chart-trend" height="200"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Budget Progress</h3><span style="font-size:.8rem;color:var(--text-muted)" id="budget-month-label"></span></div>
+        <div id="budget-progress-list"><div class="empty">No budgets set</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>⚠️ Due Soon</h3></div>
+        <div id="due-soon-list"><div class="empty">No upcoming bills</div></div>
+      </div>
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <div class="page" id="page-transactions">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
+        <h1>Transactions</h1>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-ghost" onclick="exportCSV()">📥 Export CSV</button>
+          <button class="btn btn-primary" onclick="openModal('tx')">+ Add Transaction</button>
+        </div>
+      </div>
+      <div class="month-nav">
+        <button onclick="changeMonth(-1)">◀</button>
+        <span class="month-label" id="tx-month-label">—</span>
+        <button onclick="changeMonth(1)">▶</button>
+      </div>
+      <div class="filter-row">
+        <select id="filter-category" onchange="loadTransactions()"><option value="">All Categories</option></select>
+        <select id="filter-type" onchange="loadTransactions()"><option value="">All Types</option><option value="income">Income</option><option value="expense">Expense</option></select>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Date</th><th>Category</th><th>Description</th><th>Account</th><th>Type</th><th>HST</th><th>Amount</th><th></th></tr></thead>
+          <tbody id="tx-table"><tr><td colspan="8" class="empty">No transactions</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ACCOUNTS -->
+    <div class="page" id="page-accounts">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+        <div><h1>Accounts</h1><p class="subtitle">Chequing, savings, credit, investments</p></div>
+        <button class="btn btn-primary" onclick="openModal('account')">+ Add Account</button>
+      </div>
+      <div id="accounts-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem"></div>
+    </div>
+
+    <!-- BUDGETS -->
+    <div class="page" id="page-budgets">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+        <div><h1>Monthly Budgets</h1><p class="subtitle">Set spending limits per category</p></div>
+        <button class="btn btn-primary" onclick="openModal('budget')">+ Set Budget</button>
+      </div>
+      <div class="month-nav">
+        <button onclick="changeBudgetMonth(-1)">◀</button>
+        <span class="month-label" id="budget-month-nav-label">—</span>
+        <button onclick="changeBudgetMonth(1)">▶</button>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Category</th><th>Limit</th><th>Spent</th><th>Remaining</th><th>Progress</th><th></th></tr></thead>
+          <tbody id="budgets-table"><tr><td colspan="6" class="empty">No budgets</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RECURRING -->
+    <div class="page" id="page-recurring">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+        <div><h1>Recurring Bills</h1><p class="subtitle">Subscriptions, rent, utilities</p></div>
+        <button class="btn btn-primary" onclick="openModal('recurring')">+ Add Recurring</button>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Name</th><th>Category</th><th>Amount</th><th>Frequency</th><th>Next Due</th><th>Status</th><th></th></tr></thead>
+          <tbody id="recurring-table"><tr><td colspan="7" class="empty">No recurring bills</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-tx">
+  <div class="modal">
+    <h2 id="tx-modal-title">Add Transaction</h2>
+    <div class="form-row">
+      <div class="form-group"><label>Date</label><input type="date" id="tx-date"/></div>
+      <div class="form-group"><label>Type</label><select id="tx-type"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Amount (CAD)</label><input type="number" id="tx-amount" step="0.01" placeholder="0.00"/></div>
+      <div class="form-group"><label>Category</label><select id="tx-category"></select></div>
+    </div>
+    <div class="form-group"><label>Account</label><select id="tx-account"><option value="">No account</option></select></div>
+    <div class="form-group"><label>Description</label><input type="text" id="tx-desc" placeholder="e.g. Sobeys grocery run"/></div>
+    <div class="form-group" style="display:flex;align-items:center;gap:.5rem">
+      <input type="checkbox" id="tx-hst" style="width:auto"/>
+      <label style="margin:0;cursor:pointer" for="tx-hst">Amount includes HST/GST (13%)</label>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('tx')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveTx()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-account">
+  <div class="modal">
+    <h2>Add Account</h2>
+    <div class="form-group"><label>Account Name</label><input type="text" id="acc-name" placeholder="e.g. TD Chequing"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>Type</label>
+        <select id="acc-type">
+          <option value="chequing">Chequing</option>
+          <option value="savings">Savings</option>
+          <option value="tfsa">TFSA</option>
+          <option value="rrsp">RRSP</option>
+          <option value="credit_card">Credit Card</option>
+          <option value="line_of_credit">Line of Credit</option>
+          <option value="cash">Cash</option>
+          <option value="investment">Investment</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Current Balance (CAD)</label><input type="number" id="acc-balance" step="0.01" placeholder="0.00"/></div>
+    </div>
+    <div class="form-group"><label>Notes</label><input type="text" id="acc-notes" placeholder="Optional"/></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('account')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAccount()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-budget">
+  <div class="modal">
+    <h2>Set Budget Limit</h2>
+    <div class="form-group"><label>Category</label><select id="bud-category"></select></div>
+    <div class="form-row">
+      <div class="form-group"><label>Monthly Limit (CAD)</label><input type="number" id="bud-limit" step="0.01" placeholder="0.00"/></div>
+      <div class="form-group"><label>Month</label><input type="month" id="bud-month"/></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('budget')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBudget()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-recurring">
+  <div class="modal">
+    <h2>Add Recurring Bill</h2>
+    <div class="form-group"><label>Name</label><input type="text" id="rec-name" placeholder="e.g. Rogers Internet"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>Amount (CAD)</label><input type="number" id="rec-amount" step="0.01"/></div>
+      <div class="form-group"><label>Category</label><select id="rec-category"></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Frequency</label>
+        <select id="rec-freq">
+          <option value="weekly">Weekly</option>
+          <option value="biweekly">Bi-weekly</option>
+          <option value="monthly" selected>Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="annually">Annually</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Next Due Date</label><input type="date" id="rec-due"/></div>
+    </div>
+    <div class="form-group"><label>Account</label><select id="rec-account"><option value="">No account</option></select></div>
+    <div class="form-group"><label>Notes</label><input type="text" id="rec-notes" placeholder="Optional"/></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('recurring')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveRecurring()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATEGORIES = [
+  'Rent/Mortgage','Groceries','Hydro/Utilities','Internet','Phone (Rogers/Bell/Telus)',
+  'Gas/Fuel','TTC/Transit','Car Payment','Car Insurance','Home Insurance',
+  'Coffee/Tim Hortons','Restaurants/DoorDash','LCBO/Beer Store','Entertainment',
+  'Clothing','Health/Pharmacy','Gym/Fitness','Subscriptions (Netflix/Spotify)',
+  'Travel/Airfare','Education','Childcare','Pet','RRSP Contribution','TFSA Deposit',
+  'Investments','Business Expense','HST/Tax Paid','Other Income','Salary/Employment',
+  'Side Income','Government (CERB/OAS/etc.)','Other'
+];
+
+const ACCOUNT_TYPES = { chequing:'Chequing', savings:'Savings', tfsa:'TFSA', rrsp:'RRSP', credit_card:'Credit Card', line_of_credit:'Line of Credit', cash:'Cash', investment:'Investment', other:'Other' };
+
+let currentPage = 'dashboard';
+let txMonth = new Date().getMonth()+1;
+let txYear = new Date().getFullYear();
+let budgetMonth = new Date().getMonth()+1;
+let budgetYear = new Date().getFullYear();
+let accounts = [];
+let chartCategory = null, chartTrend = null;
+
+const fmt = n => new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(n||0);
+const monthName = (m,y) => new Date(y,m-1,1).toLocaleString('en-CA',{month:'long',year:'numeric'});
+
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.querySelectorAll('.sidebar-item')[['dashboard','transactions','accounts','budgets','recurring'].indexOf(p)].classList.add('active');
+  currentPage = p;
+  if (p==='dashboard') loadDashboard();
+  else if (p==='transactions') loadTransactions();
+  else if (p==='accounts') loadAccounts();
+  else if (p==='budgets') loadBudgets();
+  else if (p==='recurring') loadRecurring();
+}
+
+function openModal(type) {
+  if (type==='tx') {
+    document.getElementById('tx-date').value = new Date().toISOString().split('T')[0];
+    populateSelect('tx-category', CATEGORIES);
+    populateAccountSelect('tx-account');
+  } else if (type==='budget') {
+    populateSelect('bud-category', CATEGORIES);
+    document.getElementById('bud-month').value = `${txYear}-${String(txMonth).padStart(2,'0')}`;
+  } else if (type==='recurring') {
+    populateSelect('rec-category', CATEGORIES);
+    populateAccountSelect('rec-account');
+    document.getElementById('rec-due').value = new Date().toISOString().split('T')[0];
+  }
+  document.getElementById('modal-'+type).classList.add('open');
+}
+function closeModal(type) { document.getElementById('modal-'+type).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
+
+function populateSelect(id, opts, valField, labelField) {
+  const sel = document.getElementById(id);
+  const prev = sel.value;
+  if (Array.isArray(opts) && typeof opts[0] === 'string') {
+    sel.innerHTML = opts.map(o=>`<option value="${o}">${o}</option>`).join('');
+  } else {
+    sel.innerHTML = opts.map(o=>`<option value="${o[valField]}">${o[labelField]}</option>`).join('');
+  }
+  if (prev) sel.value = prev;
+}
+
+function populateAccountSelect(id) {
+  const sel = document.getElementById(id);
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">No account</option>' + accounts.map(a=>`<option value="${a.id}">${a.name} (${ACCOUNT_TYPES[a.type]||a.type})</option>`).join('');
+  if (prev) sel.value = prev;
+}
+
+async function loadAccounts() {
+  const res = await fetch('/api/budget/accounts');
+  accounts = await res.json();
+  const container = document.getElementById('accounts-list');
+  if (!accounts.length) { container.innerHTML='<div class="empty">No accounts yet. Add one to get started.</div>'; return; }
+  container.innerHTML = accounts.map(a => {
+    const isDebt = ['credit_card','line_of_credit','loan'].includes(a.type);
+    const cls = isDebt ? 'red' : (a.balance > 0 ? 'green' : '');
+    return `<div class="card" style="margin:0">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-weight:600">${a.name}</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-top:.2rem">${ACCOUNT_TYPES[a.type]||a.type}</div>
+        </div>
+        <button class="btn btn-sm btn-danger" onclick="deleteAccount(${a.id})">✕</button>
+      </div>
+      <div style="margin-top:1rem;font-size:1.4rem;font-weight:700;color:var(--${cls||'text'})">${fmt(a.balance)}</div>
+      ${a.notes?`<div style="font-size:.75rem;color:var(--text-muted);margin-top:.4rem">${a.notes}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+async function saveAccount() {
+  const name = document.getElementById('acc-name').value.trim();
+  const type = document.getElementById('acc-type').value;
+  const balance = parseFloat(document.getElementById('acc-balance').value)||0;
+  const notes = document.getElementById('acc-notes').value.trim();
+  if (!name) return alert('Account name required');
+  await fetch('/api/budget/accounts', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,type,balance,notes}) });
+  closeModal('account');
+  loadAccounts();
+}
+
+async function deleteAccount(id) {
+  if (!confirm('Delete this account?')) return;
+  await fetch(`/api/budget/accounts/${id}`, { method:'DELETE' });
+  loadAccounts();
+}
+
+async function loadTransactions() {
+  document.getElementById('tx-month-label').textContent = monthName(txMonth, txYear);
+  // populate filter categories
+  const cats = document.getElementById('filter-category');
+  const prev = cats.value;
+  cats.innerHTML = '<option value="">All Categories</option>' + CATEGORIES.map(c=>`<option value="${c}">${c}</option>`).join('');
+  cats.value = prev;
+  const cat = document.getElementById('filter-category').value;
+  const type = document.getElementById('filter-type').value;
+  let url = `/api/budget/transactions?month=${txMonth}&year=${txYear}`;
+  if (cat) url += `&category=${encodeURIComponent(cat)}`;
+  if (type) url += `&type=${type}`;
+  const txs = await fetch(url).then(r=>r.json());
+  const tbody = document.getElementById('tx-table');
+  if (!txs.length) { tbody.innerHTML='<tr><td colspan="8" class="empty">No transactions this month</td></tr>'; return; }
+  tbody.innerHTML = txs.map(t => `<tr>
+    <td>${t.date}</td>
+    <td>${t.category}</td>
+    <td>${t.description||'—'}</td>
+    <td style="color:var(--text-muted)">${t.account_name||'—'}</td>
+    <td><span class="badge badge-${t.type}">${t.type}</span></td>
+    <td>${t.hst_included?`<span style="color:var(--yellow);font-size:.75rem">${fmt(t.hst_amount)} HST</span>`:'—'}</td>
+    <td style="font-weight:600;color:var(--${t.type==='income'?'green':'red'})">${t.type==='income'?'+':'−'}${fmt(t.amount)}</td>
+    <td><button class="btn btn-sm btn-danger" onclick="deleteTx(${t.id})">✕</button></td>
+  </tr>`).join('');
+}
+
+function changeMonth(dir) { txMonth += dir; if(txMonth>12){txMonth=1;txYear++;}else if(txMonth<1){txMonth=12;txYear--;} loadTransactions(); }
+function changeBudgetMonth(dir) { budgetMonth += dir; if(budgetMonth>12){budgetMonth=1;budgetYear++;}else if(budgetMonth<1){budgetMonth=12;budgetYear--;} loadBudgets(); }
+
+async function saveTx() {
+  const date = document.getElementById('tx-date').value;
+  const type = document.getElementById('tx-type').value;
+  const amount = parseFloat(document.getElementById('tx-amount').value);
+  const category = document.getElementById('tx-category').value;
+  const account_id = document.getElementById('tx-account').value||null;
+  const description = document.getElementById('tx-desc').value.trim();
+  const hst_included = document.getElementById('tx-hst').checked;
+  if (!date||!amount||!category) return alert('Date, amount, and category required');
+  await fetch('/api/budget/transactions', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({date,type,amount,category,account_id,description,hst_included}) });
+  closeModal('tx');
+  loadTransactions();
+  loadAccounts();
+}
+
+async function deleteTx(id) {
+  if (!confirm('Delete this transaction?')) return;
+  await fetch(`/api/budget/transactions/${id}`, { method:'DELETE' });
+  loadTransactions(); loadAccounts();
+}
+
+function exportCSV() { window.open('/api/budget/export'); }
+
+async function loadBudgets() {
+  document.getElementById('budget-month-nav-label').textContent = monthName(budgetMonth, budgetYear);
+  const [limits, txs] = await Promise.all([
+    fetch(`/api/budget/limits?month=${budgetMonth}&year=${budgetYear}`).then(r=>r.json()),
+    fetch(`/api/budget/transactions?month=${budgetMonth}&year=${budgetYear}&type=expense`).then(r=>r.json())
+  ]);
+  const spent = {};
+  txs.forEach(t => { spent[t.category] = (spent[t.category]||0) + t.amount; });
+  const tbody = document.getElementById('budgets-table');
+  if (!limits.length) { tbody.innerHTML='<tr><td colspan="6" class="empty">No budgets set</td></tr>'; return; }
+  tbody.innerHTML = limits.map(l => {
+    const s = spent[l.category]||0;
+    const pct = Math.min((s/l.monthly_limit)*100, 100);
+    const rem = l.monthly_limit - s;
+    const cls = pct>=100?'over':pct>=80?'warn':'ok';
+    return `<tr>
+      <td>${l.category}</td>
+      <td>${fmt(l.monthly_limit)}</td>
+      <td style="color:var(--red)">${fmt(s)}</td>
+      <td style="color:var(--${rem<0?'red':'green'})">${fmt(rem)}</td>
+      <td style="min-width:120px"><div class="progress-bar"><div class="progress-fill progress-${cls}" style="width:${pct}%"></div></div><div style="font-size:.7rem;color:var(--text-muted);margin-top:.2rem">${pct.toFixed(0)}%</div></td>
+      <td><button class="btn btn-sm btn-danger" onclick="deleteLimit(${l.id})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+async function saveBudget() {
+  const category = document.getElementById('bud-category').value;
+  const monthly_limit = parseFloat(document.getElementById('bud-limit').value);
+  const [year, month] = document.getElementById('bud-month').value.split('-');
+  if (!category||!monthly_limit) return alert('Category and limit required');
+  await fetch('/api/budget/limits', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({category,monthly_limit,month:Number(month),year:Number(year)}) });
+  closeModal('budget');
+  loadBudgets();
+}
+
+async function deleteLimit(id) {
+  await fetch(`/api/budget/limits/${id}`, { method:'DELETE' });
+  loadBudgets();
+}
+
+async function loadRecurring() {
+  const recs = await fetch('/api/budget/recurring').then(r=>r.json());
+  const tbody = document.getElementById('recurring-table');
+  const today = new Date().toISOString().split('T')[0];
+  if (!recs.length) { tbody.innerHTML='<tr><td colspan="7" class="empty">No recurring bills</td></tr>'; return; }
+  tbody.innerHTML = recs.map(r => {
+    const dueDate = r.next_due;
+    const daysUntil = dueDate ? Math.ceil((new Date(dueDate)-new Date(today))/(1000*60*60*24)) : null;
+    let dueLabel = dueDate||'—';
+    let dueCls = '';
+    if (daysUntil !== null) {
+      if (daysUntil < 0) { dueLabel += ` <span class="alert-overdue">OVERDUE</span>`; dueCls='alert-overdue'; }
+      else if (daysUntil <= 5) { dueLabel += ` <span class="alert-due">(${daysUntil}d)</span>`; }
+    }
+    return `<tr>
+      <td style="font-weight:500">${r.name}</td>
+      <td>${r.category}</td>
+      <td style="color:var(--red);font-weight:600">${fmt(r.amount)}</td>
+      <td><span class="badge badge-type">${r.frequency}</span></td>
+      <td>${dueLabel}</td>
+      <td><span class="badge" style="background:rgba(16,185,129,.15);color:var(--green)">Active</span></td>
+      <td><button class="btn btn-sm btn-danger" onclick="deleteRecurring(${r.id})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+async function saveRecurring() {
+  const name = document.getElementById('rec-name').value.trim();
+  const amount = parseFloat(document.getElementById('rec-amount').value);
+  const category = document.getElementById('rec-category').value;
+  const frequency = document.getElementById('rec-freq').value;
+  const next_due = document.getElementById('rec-due').value;
+  const account_id = document.getElementById('rec-account').value||null;
+  const notes = document.getElementById('rec-notes').value.trim();
+  if (!name||!amount||!category) return alert('Name, amount, and category required');
+  await fetch('/api/budget/recurring', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,amount,category,frequency,next_due,account_id,notes}) });
+  closeModal('recurring');
+  loadRecurring();
+}
+
+async function deleteRecurring(id) {
+  if (!confirm('Delete recurring bill?')) return;
+  await fetch(`/api/budget/recurring/${id}`, { method:'DELETE' });
+  loadRecurring();
+}
+
+async function loadDashboard() {
+  const [summary, recs] = await Promise.all([
+    fetch('/api/budget/summary').then(r=>r.json()),
+    fetch('/api/budget/recurring').then(r=>r.json())
+  ]);
+  document.getElementById('stat-networth').textContent = fmt(summary.netWorth);
+  document.getElementById('stat-networth').className = 'value ' + (summary.netWorth>=0?'green':'red');
+  document.getElementById('stat-assets').textContent = fmt(summary.totalAssets);
+  document.getElementById('stat-debt').textContent = fmt(summary.totalDebt);
+  document.getElementById('stat-income').textContent = fmt(summary.monthIncome);
+  document.getElementById('stat-expenses').textContent = fmt(summary.monthExpenses);
+  const net = summary.monthIncome - summary.monthExpenses;
+  const netEl = document.getElementById('stat-net');
+  netEl.textContent = fmt(net);
+  netEl.className = 'value ' + (net>=0?'green':'red');
+
+  // Category chart
+  if (chartCategory) chartCategory.destroy();
+  const catCtx = document.getElementById('chart-category').getContext('2d');
+  const cats = summary.byCategory.slice(0,8);
+  chartCategory = new Chart(catCtx, {
+    type: 'doughnut',
+    data: { labels: cats.map(c=>c.category), datasets: [{ data: cats.map(c=>c.total), backgroundColor: ['#7c3aed','#9d5ff5','#10b981','#ef4444','#f59e0b','#3b82f6','#ec4899','#6366f1'] }] },
+    options: { plugins: { legend: { position:'right', labels:{ color:'#94a3b8', font:{size:11} } } }, cutout:'60%' }
+  });
+
+  // Trend chart
+  if (chartTrend) chartTrend.destroy();
+  const trendCtx = document.getElementById('chart-trend').getContext('2d');
+  const trend = [...summary.monthlyTrend].reverse();
+  chartTrend = new Chart(trendCtx, {
+    type: 'bar',
+    data: { labels: trend.map(t=>t.ym), datasets: [
+      { label:'Income', data: trend.map(t=>t.income), backgroundColor:'rgba(16,185,129,.7)' },
+      { label:'Expenses', data: trend.map(t=>t.expenses), backgroundColor:'rgba(239,68,68,.7)' }
+    ]},
+    options: { plugins:{ legend:{ labels:{ color:'#94a3b8' } } }, scales:{ x:{ ticks:{color:'#94a3b8'}, grid:{color:'#2a2a3d'} }, y:{ ticks:{color:'#94a3b8'}, grid:{color:'#2a2a3d'} } } }
+  });
+
+  // Budget progress
+  const now = new Date();
+  const m = now.getMonth()+1, y = now.getFullYear();
+  document.getElementById('budget-month-label').textContent = monthName(m,y);
+  const [limits, txs] = await Promise.all([
+    fetch(`/api/budget/limits?month=${m}&year=${y}`).then(r=>r.json()),
+    fetch(`/api/budget/transactions?month=${m}&year=${y}&type=expense`).then(r=>r.json())
+  ]);
+  const spent = {};
+  txs.forEach(t => { spent[t.category] = (spent[t.category]||0)+t.amount; });
+  const progList = document.getElementById('budget-progress-list');
+  if (!limits.length) { progList.innerHTML='<div class="empty">No budgets set for this month</div>'; }
+  else {
+    progList.innerHTML = limits.map(l => {
+      const s = spent[l.category]||0;
+      const pct = Math.min((s/l.monthly_limit)*100,100);
+      const cls = pct>=100?'over':pct>=80?'warn':'ok';
+      return `<div style="margin-bottom:1rem">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem"><span>${l.category}</span><span style="color:var(--text-muted)">${fmt(s)} / ${fmt(l.monthly_limit)}</span></div>
+        <div class="progress-bar"><div class="progress-fill progress-${cls}" style="width:${pct}%"></div></div>
+      </div>`;
+    }).join('');
+  }
+
+  // Due soon
+  const today = new Date().toISOString().split('T')[0];
+  const dueSoon = recs.filter(r => {
+    if (!r.next_due) return false;
+    const days = Math.ceil((new Date(r.next_due)-new Date(today))/(1000*60*60*24));
+    return days <= 7;
+  });
+  const dueEl = document.getElementById('due-soon-list');
+  if (!dueSoon.length) { dueEl.innerHTML='<div class="empty">No bills due in the next 7 days</div>'; }
+  else {
+    dueEl.innerHTML = dueSoon.map(r => {
+      const days = Math.ceil((new Date(r.next_due)-new Date(today))/(1000*60*60*24));
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border)">
+        <div><div style="font-weight:500">${r.name}</div><div style="font-size:.75rem;color:var(--text-muted)">${r.category}</div></div>
+        <div style="text-align:right">
+          <div style="font-weight:600;color:var(--red)">${fmt(r.amount)}</div>
+          <div class="${days<0?'alert-overdue':'alert-due'}">${days<0?'OVERDUE':days===0?'Due today':`Due in ${days}d`}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+}
+
+// Init
+(async () => {
+  const res = await fetch('/api/budget/accounts');
+  accounts = await res.json();
+  // populate category filters
+  document.getElementById('filter-category').innerHTML = '<option value="">All Categories</option>' + CATEGORIES.map(c=>`<option value="${c}">${c}</option>`).join('');
+  loadDashboard();
+})();
+</script>
+</body>
+</html>
