@@ -3,6 +3,7 @@ const Database = require('better-sqlite3');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const { generateProposal } = require('./proposal-generator');
 
 const app = express();
 const PORT = 8080;
@@ -21,8 +22,25 @@ db.exec(`
     business TEXT,
     service TEXT,
     message TEXT,
+    status TEXT DEFAULT 'new',
+    source TEXT DEFAULT 'website',
+    notes TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+  CREATE TABLE IF NOT EXISTS outreach (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    business_name TEXT,
+    owner_name TEXT,
+    email TEXT,
+    phone TEXT,
+    website TEXT,
+    city TEXT,
+    industry TEXT,
+    notes TEXT,
+    status TEXT DEFAULT 'prospect',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
+  );
 `);
 
 // Lead submission
@@ -44,10 +62,55 @@ app.post('/api/leads', (req, res) => {
   res.json({ success: true, id: result.lastInsertRowid });
 });
 
-// View leads (simple admin)
+// View leads
 app.get('/api/leads', (req, res) => {
   const leads = db.prepare('SELECT * FROM leads ORDER BY created_at DESC').all();
   res.json(leads);
+});
+
+// Update lead status/notes
+app.patch('/api/leads/:id', (req, res) => {
+  const { status, notes } = req.body;
+  db.prepare('UPDATE leads SET status=COALESCE(?,status), notes=COALESCE(?,notes), updated_at=CURRENT_TIMESTAMP WHERE id=?')
+    .run(status || null, notes || null, req.params.id);
+  res.json({ success: true });
+});
+
+// Generate proposal PDF
+app.post('/api/proposals', async (req, res) => {
+  try {
+    const pdfPath = await generateProposal(req.body);
+    res.download(pdfPath);
+  } catch (e) {
+    console.error('Proposal error:', e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Outreach CRM
+app.get('/api/outreach', (req, res) => {
+  const rows = db.prepare('SELECT * FROM outreach ORDER BY created_at DESC').all();
+  res.json(rows);
+});
+
+app.post('/api/outreach', (req, res) => {
+  const { business_name, owner_name, email, phone, website, city, industry, notes } = req.body;
+  const result = db.prepare(
+    'INSERT INTO outreach (business_name,owner_name,email,phone,website,city,industry,notes) VALUES (?,?,?,?,?,?,?,?)'
+  ).run(business_name, owner_name||'', email||'', phone||'', website||'', city||'Toronto', industry||'', notes||'');
+  res.json({ success: true, id: result.lastInsertRowid });
+});
+
+app.patch('/api/outreach/:id', (req, res) => {
+  const { status, notes } = req.body;
+  db.prepare('UPDATE outreach SET status=COALESCE(?,status), notes=COALESCE(?,notes) WHERE id=?')
+    .run(status||null, notes||null, req.params.id);
+  res.json({ success: true });
+});
+
+app.delete('/api/outreach/:id', (req, res) => {
+  db.prepare('DELETE FROM outreach WHERE id=?').run(req.params.id);
+  res.json({ success: true });
 });
 
 // AI Chatbot endpoint
