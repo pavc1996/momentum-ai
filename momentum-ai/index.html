@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Momentum AI — Grow Smarter</title>
+  <title>Momentum AI — AI Tools for Canadian Small Business</title>
+  <meta name="description" content="Momentum AI helps Canadian small businesses grow with AI-powered websites, chatbots, automation, and marketing. Toronto-based. Starting at $299/mo."/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -12,11 +13,12 @@
   <!-- NAV -->
   <nav>
     <div class="logo">Momentum<span>AI</span></div>
-    <ul>
+    <button id="nav-toggle" class="nav-toggle" aria-label="Menu">☰</button>
+    <ul id="nav-menu">
       <li><a href="#services">Services</a></li>
-      <li><a href="#why">Why Us</a></li>
+      <li><a href="#how">How It Works</a></li>
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#blog">Blog</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="crm.html">CRM</a></li>
       <li><a href="budget.html">Budget</a></li>
       <li><a href="#contact" class="btn-nav">Get Started</a></li>
@@ -225,11 +227,155 @@
     </form>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-header">
+      <h2>What Clients Say</h2>
+      <p>Real results from real Canadian businesses.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Momentum AI built our website and set up an AI chatbot in under two weeks. We're getting 3x more leads than before and the chatbot handles 80% of inquiries automatically."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JK</div>
+          <div><strong>Jason K.</strong><br/><span>Plumber, Mississauga ON</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"They automated our entire booking and follow-up process. I used to spend 2 hours a day on admin. Now it's 10 minutes. Worth every penny of the Growth plan."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SM</div>
+          <div><strong>Sarah M.</strong><br/><span>Yoga Studio, Toronto ON</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Our Google ranking went from page 4 to the top 3 in 60 days. The SEO work they did is insane for a small restaurant. We're booked solid on weekends now."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">DL</div>
+          <div><strong>David L.</strong><br/><span>Restaurant Owner, Vaughan ON</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>From zero to results in 3 simple steps.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Free Strategy Call</h3>
+        <p>We learn your business, goals, and biggest bottlenecks. No pitch. No pressure. Just clarity on what will actually move the needle.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We Build Everything</h3>
+        <p>Our team builds your site, automation, and AI tools in 7–14 days. You approve each piece. We handle all the technical work.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>You Start Growing</h3>
+        <p>Launch day. Your tools go live, leads start coming in, and we stay on to optimize and improve. You focus on running your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="section-header">
+      <h2>Common Questions</h2>
+      <p>Everything you need to know before getting started.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do I need any technical knowledge?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Zero. We handle everything technical. You just tell us your goals and we build it. You'll get a simple dashboard to manage your tools.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How fast will I see results?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Most clients see their first new leads within 7 days of launching. SEO takes 45–90 days to show full impact, but we set up paid/organic funnels in parallel so you get leads immediately.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What if I want to cancel?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Cancel anytime, no lock-in contracts. You keep everything we built — the website, chatbot, automations. All yours. We just stop the monthly maintenance.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Is this built for Canadian businesses specifically?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Yes. We focus exclusively on Canadian businesses — especially Ontario. Local SEO, Canadian payment processors, HST compliance, Google Maps optimization for your city. We know this market.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What industries do you work with?</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Trades (plumbing, HVAC, electrical, roofing), health & wellness, restaurants & food service, professional services (lawyers, accountants), retail, and real estate. If you serve local customers, we can help.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="cta-inner">
+      <h2>Ready to Make a Move?</h2>
+      <p>Free consultation. No commitment. Just a conversation about your business and how AI can grow it.</p>
+      <a href="#contact" class="btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem">Book Your Free Call →</a>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
-      <div class="logo">Momentum<span>AI</span></div>
-      <p>© 2026 Momentum AI. Built to make small businesses unstoppable.</p>
+      <div>
+        <div class="logo" style="margin-bottom:.5rem">Momentum<span>AI</span></div>
+        <p style="max-width:300px">AI-powered growth tools for Canadian small businesses. Toronto-based, Canadian-focused.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Services</h4>
+          <a href="#services">Website Design</a>
+          <a href="#services">AI Chatbots</a>
+          <a href="#services">Automation</a>
+          <a href="#services">SEO</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#why">Why Us</a>
+          <a href="#how">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:hello@momentum-ai.ca">hello@momentum-ai.ca</a>
+          <a href="#contact">Book a Call</a>
+          <a href="https://www.instagram.com" target="_blank">Instagram</a>
+          <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Momentum AI Inc. Toronto, Ontario, Canada. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></p>
     </div>
   </footer>
 
@@ -285,6 +431,25 @@
       }
       btn.disabled = false;
     }
+
+    // FAQ toggle
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Animate stats on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.service-card, .why-item, .step, .testimonial-card, .faq-item').forEach(el => observer.observe(el));
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {

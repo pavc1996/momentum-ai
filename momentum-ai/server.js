@@ -45,6 +45,17 @@ db.exec(`
     year INTEGER NOT NULL,
     UNIQUE(category, month, year)
   );
+  CREATE TABLE IF NOT EXISTS budget_goals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    target_amount REAL NOT NULL,
+    current_amount REAL DEFAULT 0,
+    target_date TEXT,
+    account_id INTEGER,
+    notes TEXT,
+    active INTEGER DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
   CREATE TABLE IF NOT EXISTS budget_recurring (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -184,6 +195,29 @@ app.post('/api/chat', (req, res) => {
 });
 
 // ============ BUDGET API ============
+
+// Goals
+app.get('/api/budget/goals', (req, res) => {
+  res.json(db.prepare('SELECT * FROM budget_goals WHERE active=1 ORDER BY target_date').all());
+});
+app.post('/api/budget/goals', (req, res) => {
+  const { name, target_amount, current_amount, target_date, account_id, notes } = req.body;
+  const r = db.prepare('INSERT INTO budget_goals (name,target_amount,current_amount,target_date,account_id,notes) VALUES (?,?,?,?,?,?)')
+    .run(name, target_amount, current_amount||0, target_date||null, account_id||null, notes||'');
+  res.json({ success: true, id: r.lastInsertRowid });
+});
+app.patch('/api/budget/goals/:id', (req, res) => {
+  const { name, target_amount, current_amount, target_date, notes } = req.body;
+  db.prepare('UPDATE budget_goals SET name=COALESCE(?,name), target_amount=COALESCE(?,target_amount), current_amount=COALESCE(?,current_amount), target_date=COALESCE(?,target_date), notes=COALESCE(?,notes) WHERE id=?')
+    .run(name||null, target_amount!=null?target_amount:null, current_amount!=null?current_amount:null, target_date||null, notes||null, req.params.id);
+  res.json({ success: true });
+});
+app.delete('/api/budget/goals/:id', (req, res) => {
+  db.prepare('DELETE FROM budget_goals WHERE id=?').run(req.params.id);
+  res.json({ success: true });
+});
+
+
 
 // Accounts
 app.get('/api/budget/accounts', (req, res) => {
