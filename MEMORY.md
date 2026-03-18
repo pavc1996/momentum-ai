@@ -67,3 +67,11 @@
 ---
 
 *Last updated: 2026-03-18 02:00 EST*
+
+### 4. Bags (NFT & Crypto Portfolio Tracker)
+- **What:** Track crypto/NFT holdings, P&L, trades, watchlist
+- **Repo:** github.com/pavc1996/nft-tracker (PRIVATE)
+- **Local:** http://localhost:8083 (PM2: bags)
+- **Stack:** Node.js + Express + SQLite
+- **Status:** Running locally
+- **Features:** Dashboard with charts, holdings with auto P&L, transaction log, watchlist with price alerts, multi-wallet, bulk price update API
