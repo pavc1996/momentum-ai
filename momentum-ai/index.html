@@ -3,526 +3,623 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Momentum AI — AI Tools for Canadian Small Business</title>
-  <meta name="description" content="Momentum AI gives Canadian small businesses enterprise-grade AI — websites, automation, chatbots, content, and more. Starting at $299/mo." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>Momentum AI — AI for Canadian Small Business</title>
+  <meta name="description" content="Momentum AI gives Canadian small businesses AI-powered websites, chatbots, and automation. No tech degree required. Starting at $299/mo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="logo">Momentum<span>AI</span></div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
-    <ul id="nav-menu">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#blog">Blog</a></li>
-      <li><a href="#contact" class="btn-nav">Get Started</a></li>
-    </ul>
-  </nav>
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <div class="logo">Momentum<span>AI</span></div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">☰</button>
+  <ul id="nav-menu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact" class="btn-nav">Get Started →</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-badge">🇨🇦 Built for Canadian Business</div>
-      <h1>
-        Stop Losing Customers<br/>
-        to Businesses With<br/>
-        <span class="highlight">Better AI</span>
-      </h1>
-      <p>
-        Momentum AI gives small businesses in Canada enterprise-grade websites, chatbots, and automation — without hiring a team or breaking the budget.
-      </p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn-primary">Start Free Consultation →</a>
-        <a href="#services" class="btn-secondary">See What We Build</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <span class="num">10x</span>
-          <span class="label">Faster than hiring</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">$0</span>
-          <span class="label">Upfront cost</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">24/7</span>
-          <span class="label">AI working for you</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">100+</span>
-          <span class="label">Businesses helped</span>
-        </div>
-      </div>
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="dot"></div>
+      AI-Powered · Made for Canada
     </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="services-header">
-      <div>
-        <div class="section-tag">What We Build</div>
-        <h2 class="section-title">Everything you need<br/>to compete in 2026</h2>
-      </div>
-      <a href="#contact" class="btn-secondary">Talk to us →</a>
+    <h1>
+      Your Competitors<br/>
+      Are Already Using<br/>
+      <em>AI. Are You?</em>
+    </h1>
+    <p class="hero-sub">
+      Momentum AI gives Canadian small businesses enterprise-grade websites, chatbots, and automation — without the agency price tag or the tech headache.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start Free Consultation →</a>
+      <a href="#services" class="btn-ghost">See What We Build</a>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="service-icon-wrap">🌐</div>
-        <h3>Website Design & Build</h3>
-        <p>Fast, modern, mobile-ready websites that convert visitors into paying customers. Built in days, not months.</p>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <span class="proof-num">10x</span>
+        <span class="proof-label">Faster than hiring</span>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon-wrap">🤖</div>
-        <h3>AI Chatbots</h3>
-        <p>24/7 customer service trained on your business. Answers questions, books appointments, captures leads — while you sleep.</p>
+      <div class="proof-item">
+        <span class="proof-num">7</span>
+        <span class="proof-label">Day avg delivery</span>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon-wrap">⚡</div>
-        <h3>Business Automation</h3>
-        <p>Kill the repetitive work. We automate invoicing, follow-ups, reminders, data entry — anything eating your time.</p>
+      <div class="proof-item">
+        <span class="proof-num">$0</span>
+        <span class="proof-label">Upfront cost</span>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon-wrap">✍️</div>
-        <h3>AI Content & Copy</h3>
-        <p>Blogs, social posts, ads, emails — consistent, on-brand content generated at scale. Stay top-of-mind without burnout.</p>
+      <div class="proof-item">
+        <span class="proof-num">100%</span>
+        <span class="proof-label">Client satisfaction</span>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon-wrap">📈</div>
-        <h3>SEO & Local Search</h3>
-        <p>Get found on Google. AI-powered SEO that puts your business in front of customers actively searching for you.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-icon-wrap">📊</div>
-        <h3>Analytics & Insights</h3>
-        <p>Custom dashboards and AI-driven reports that turn raw data into decisions that make you money.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY US -->
-  <section class="why" id="why">
-    <div style="text-align:center;margin-bottom:3.5rem">
-      <div class="section-tag">Why Momentum AI</div>
-      <h2 class="section-title">Not an agency. Your unfair advantage.</h2>
-      <p class="section-sub" style="margin:0 auto">We're not here to bill hours. We're here to make your business more money.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card fade-up">
-        <span class="icon">🚀</span>
-        <h4>Speed</h4>
-        <p>Most projects delivered in 7–14 days. No waiting months for results that should have happened last year.</p>
-      </div>
-      <div class="why-card fade-up">
-        <span class="icon">💰</span>
-        <h4>ROI First</h4>
-        <p>Every service is tied to a business outcome. We don't build for vanity — we build for revenue.</p>
-      </div>
-      <div class="why-card fade-up">
-        <span class="icon">🔓</span>
-        <h4>No Lock-In</h4>
-        <p>You own everything we build. Cancel anytime, keep it all. Zero long-term contracts.</p>
-      </div>
-      <div class="why-card fade-up">
-        <span class="icon">🧠</span>
-        <h4>Always Current</h4>
-        <p>AI moves fast. We stay ahead of every update so your business doesn't fall behind.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how" id="how">
-    <div style="text-align:center;margin-bottom:3.5rem">
-      <div class="section-tag">The Process</div>
-      <h2 class="section-title">From zero to running<br/>in 3 steps</h2>
-    </div>
-    <div class="steps">
-      <div class="step fade-up">
-        <div class="step-num">1</div>
-        <h3>Free Strategy Call</h3>
-        <p>We learn your business, goals, and biggest bottlenecks. No pitch. Just clarity on what will move the needle.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">2</div>
-        <h3>We Build Everything</h3>
-        <p>Our team builds your site, automation, and AI tools in 7–14 days. You approve each piece. We handle everything technical.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">3</div>
-        <h3>You Start Growing</h3>
-        <p>Launch day. Leads start coming in, and we stay on to optimize and improve. You focus on running your business.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="pricing" id="pricing">
-    <div class="pricing-header">
-      <div class="section-tag">Pricing</div>
-      <h2 class="section-title">Simple, honest pricing</h2>
-      <p class="section-sub">No surprises. No hidden fees. No BS. Just results.</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="pricing-card fade-up">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price">$299<span>/mo</span></div>
-        <ul>
-          <li>5-page professional website</li>
-          <li>AI chatbot (basic)</li>
-          <li>8 social posts/month</li>
-          <li>Monthly analytics report</li>
-          <li>Email support</li>
-        </ul>
-        <a href="#contact" class="btn-primary">Get Started</a>
-      </div>
-      <div class="pricing-card featured fade-up">
-        <div class="badge">Most Popular</div>
-        <div class="plan-name">Growth</div>
-        <div class="plan-price">$699<span>/mo</span></div>
-        <ul>
-          <li>10-page website + blog</li>
-          <li>Advanced AI chatbot</li>
-          <li>Full automation setup</li>
-          <li>20 content pieces/month</li>
-          <li>SEO optimization</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="#contact" class="btn-primary">Get Started</a>
-      </div>
-      <div class="pricing-card fade-up">
-        <div class="plan-name">Scale</div>
-        <div class="plan-price">$1,499<span>/mo</span></div>
-        <ul>
-          <li>Everything in Growth</li>
-          <li>Custom AI tools built for you</li>
-          <li>Full analytics dashboard</li>
-          <li>Dedicated account manager</li>
-          <li>Unlimited revisions</li>
-          <li>Weekly strategy calls</li>
-        </ul>
-        <a href="#contact" class="btn-primary">Get Started</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials" id="testimonials">
-    <div class="testimonials-header">
-      <div class="section-tag">Client Results</div>
-      <h2 class="section-title">Real businesses. Real results.</h2>
-      <p class="section-sub">Canadian small businesses that stopped leaving money on the table.</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card fade-up">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Momentum AI built our site and chatbot in under two weeks. We're getting 3x more leads and the bot handles 80% of inquiries on its own. Worth every dollar."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">JK</div>
-          <div>
-            <div class="author-name">Jason K.</div>
-            <div class="author-biz">Plumber, Mississauga ON</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card fade-up">
-        <div class="stars">★★★★★</div>
-        <blockquote>"They automated our entire booking and follow-up process. I used to spend 2 hours a day on admin. Now it's 10 minutes. Genuinely life-changing for our studio."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">SM</div>
-          <div>
-            <div class="author-name">Sarah M.</div>
-            <div class="author-biz">Yoga Studio Owner, Toronto ON</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card fade-up">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Our Google ranking went from page 4 to top 3 in 60 days. The SEO work they did is incredible for a small restaurant. We're booked solid on weekends now."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">DL</div>
-          <div>
-            <div class="author-name">David L.</div>
-            <div class="author-biz">Restaurant Owner, Vaughan ON</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="faq-inner">
-      <div class="faq-header">
-        <div class="section-tag">FAQ</div>
-        <h2 class="section-title">Questions we get asked</h2>
-        <p class="section-sub">Everything you need to know before getting started.</p>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <span>Do I need any technical knowledge?</span>
-            <span class="faq-arrow">▼</span>
-          </div>
-          <div class="faq-a">Zero. We handle everything technical. You just tell us your goals and we build it. You'll get a simple dashboard to manage your tools with no coding required.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <span>How fast will I see results?</span>
-            <span class="faq-arrow">▼</span>
-          </div>
-          <div class="faq-a">Most clients see their first new leads within 7 days of launch. SEO takes 45–90 days for full impact, but we set up quick-win funnels in parallel so you get results immediately.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <span>What if I want to cancel?</span>
-            <span class="faq-arrow">▼</span>
-          </div>
-          <div class="faq-a">Cancel anytime — no lock-in contracts. You keep everything we built. The website, chatbot, automations — all yours. We just stop the monthly maintenance.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <span>Is this built specifically for Canadian businesses?</span>
-            <span class="faq-arrow">▼</span>
-          </div>
-          <div class="faq-a">Yes. We focus exclusively on Canadian small businesses — especially Ontario. Local SEO, Canadian payment processors, HST compliance, Google Maps optimization for your city. We know this market.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <span>What industries do you work with?</span>
-            <span class="faq-arrow">▼</span>
-          </div>
-          <div class="faq-a">Trades (plumbing, HVAC, electrical, roofing), health & wellness, restaurants & food service, professional services (lawyers, accountants), retail, and real estate. If you serve local customers, we can help.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <span>How is Momentum AI different from an agency?</span>
-            <span class="faq-arrow">▼</span>
-          </div>
-          <div class="faq-a">Traditional agencies charge $5,000–$30,000 upfront and take months to deliver. We're month-to-month, deliver in 7–14 days, and every service is tied to a specific business outcome. We're your ongoing AI partner, not a one-time project.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG -->
-  <section class="blog" id="blog">
-    <div class="blog-header">
-      <div>
-        <div class="section-tag">Resources</div>
-        <h2 class="section-title">Insights for Canadian businesses</h2>
-      </div>
-      <a href="#contact" class="btn-secondary">Get in touch →</a>
-    </div>
-    <div class="blog-grid">
-      <div class="blog-card fade-up">
-        <div class="blog-tag">AI Automation</div>
-        <h3>5 Tasks Every Small Business Should Automate in 2026</h3>
-        <p>Most small business owners spend 15+ hours a week on repetitive tasks. Here's what to automate first — and what it's worth to your bottom line.</p>
-        <a href="#contact" class="blog-link">Read More →</a>
-      </div>
-      <div class="blog-card fade-up">
-        <div class="blog-tag">Local SEO</div>
-        <h3>How to Show Up #1 on Google Maps in Your City</h3>
-        <p>Local SEO has changed. AI-powered optimization is how small businesses in Ontario are beating franchises in local search — without a massive budget.</p>
-        <a href="#contact" class="blog-link">Read More →</a>
-      </div>
-      <div class="blog-card fade-up">
-        <div class="blog-tag">AI Chatbots</div>
-        <h3>Why Your Website Is Losing Leads at 2am (And How to Fix It)</h3>
-        <p>60% of website visitors come outside business hours. An AI chatbot captures those leads, qualifies them, and books appointments while you sleep.</p>
-        <a href="#contact" class="blog-link">Read More →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BANNER -->
-  <section class="cta-banner">
-    <div class="section-tag">Ready to Move?</div>
-    <h2>Stop Watching Competitors Win<br/>Clients You Should Have</h2>
-    <p>Free 30-minute strategy call. We'll show you exactly where you're leaving money on the table and what it would take to fix it.</p>
-    <a href="#contact" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem">Book Your Free Call →</a>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="contact-header">
-      <div class="section-tag">Let's Talk</div>
-      <h2 class="section-title">Free 30-minute strategy call</h2>
-      <p class="section-sub">No pressure, no pitch — just an honest conversation about your business and where AI can grow it.</p>
-    </div>
-    <form class="contact-form" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <input id="f-name" type="text" placeholder="Your Name" required />
-        <input id="f-email" type="email" placeholder="Email Address" required />
-      </div>
-      <input id="f-business" type="text" placeholder="Business Name" />
-      <select id="f-service">
-        <option value="" disabled selected>What do you need help with?</option>
-        <option>Website Design & Build</option>
-        <option>AI Chatbot</option>
-        <option>Business Automation</option>
-        <option>Content & Copywriting</option>
-        <option>SEO & Local Search</option>
-        <option>Analytics & Insights</option>
-        <option>Everything — let's talk</option>
-      </select>
-      <textarea id="f-message" placeholder="Tell us about your business and what you want to achieve..." rows="4"></textarea>
-      <button type="submit" class="btn-primary" id="submit-btn">Send Message →</button>
-      <p id="form-status" style="margin-top:12px;font-size:0.875rem;color:#9B4FFF;display:none;text-align:center"></p>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo">Momentum<span>AI</span></div>
-        <p>AI-powered growth tools for Canadian small businesses. Built in Ontario. Trusted across the country.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="#services">Website Design</a>
-        <a href="#services">AI Chatbots</a>
-        <a href="#services">Automation</a>
-        <a href="#services">SEO & Local Search</a>
-        <a href="#services">AI Content</a>
-        <a href="#services">Analytics</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#why">Why Us</a>
-        <a href="#how">How It Works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-        <a href="#blog">Blog</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="mailto:hello@momentumai.ca">hello@momentumai.ca</a>
-        <a href="#contact">Book a Call</a>
-        <a href="https://instagram.com" target="_blank">Instagram</a>
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Momentum AI. Toronto, Ontario, Canada.</p>
-      <div style="display:flex;gap:1.5rem">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- CHATBOT -->
-  <div id="chat-bubble" onclick="toggleChat()" title="Chat with us">💬</div>
-  <div id="chat-window">
-    <div id="chat-header">
-      <span>Momentum AI Assistant</span>
-      <button onclick="toggleChat()">✕</button>
-    </div>
-    <div id="chat-messages">
-      <div class="chat-msg bot">Hey! 👋 Ask me anything about our services or pricing.</div>
-    </div>
-    <div id="chat-input-row">
-      <input id="chat-input" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()" />
-      <button onclick="sendChat()">→</button>
     </div>
   </div>
+</section>
 
-  <script>
-    // Scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+<!-- ─── SOCIAL PROOF BAR ─── -->
+<div class="proof-bar">
+  <span class="proof-bar-label">Trusted by businesses in</span>
+  <div class="proof-bar-items">
+    <span class="proof-bar-item">Toronto</span>
+    <span class="proof-bar-item">London</span>
+    <span class="proof-bar-item">Hamilton</span>
+    <span class="proof-bar-item">Mississauga</span>
+    <span class="proof-bar-item">Kitchener</span>
+    <span class="proof-bar-item">Ottawa</span>
+    <span class="proof-bar-item">Brampton</span>
+    <span class="proof-bar-item">Oakville</span>
+  </div>
+</div>
 
-    // Mobile nav
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
-    navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
+<!-- ─── SERVICES ─── -->
+<section class="section services-section" id="services">
+  <div class="services-top">
+    <div>
+      <div class="tag">What We Build</div>
+      <h2 class="headline">Everything a small<br/>business needs to compete</h2>
+    </div>
+    <a href="#contact" class="btn-ghost">Work with us →</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-num">01</div>
+      <span class="service-icon">🌐</span>
+      <h3>Website Design & Build</h3>
+      <p>Fast, mobile-ready websites that convert visitors into paying customers. Built in days, not months.</p>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">02</div>
+      <span class="service-icon">🤖</span>
+      <h3>AI Chatbots</h3>
+      <p>24/7 customer service trained on your business. Answers questions, books appointments, captures leads while you sleep.</p>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">03</div>
+      <span class="service-icon">⚡</span>
+      <h3>Business Automation</h3>
+      <p>Automate invoicing, follow-ups, reminders, and data entry. Get back 10+ hours every week.</p>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">04</div>
+      <span class="service-icon">✍️</span>
+      <h3>AI Content & Copy</h3>
+      <p>Blogs, social posts, ads, emails — consistent, on-brand content generated at scale without the burnout.</p>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">05</div>
+      <span class="service-icon">📈</span>
+      <h3>SEO & Local Search</h3>
+      <p>AI-powered SEO that gets your business ranking on Google when local customers search for what you offer.</p>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">06</div>
+      <span class="service-icon">📊</span>
+      <h3>Analytics & Insights</h3>
+      <p>Custom dashboards and AI-driven reports that turn raw data into decisions that grow your revenue.</p>
+    </div>
+  </div>
+</section>
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-      });
+<!-- ─── FEATURES / WHY US ─── -->
+<section class="section features-section" id="why">
+  <div class="features-inner">
+    <div>
+      <div class="tag">Why Momentum AI</div>
+      <h2 class="headline">Not an agency.<br/>Your unfair advantage.</h2>
+      <p class="sub" style="margin-bottom:3rem">We're not here to bill hours. We build tools that make your business more money — and stay on to prove it.</p>
+      <div class="features-list">
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🚀</div>
+          <div>
+            <h4>Built in 7–14 Days</h4>
+            <p>No waiting months for a website that should've been live last year. We move fast and get things shipped.</p>
+          </div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">💰</div>
+          <div>
+            <h4>ROI-First Thinking</h4>
+            <p>Every service is tied to a business outcome. We don't build for vanity — we build for revenue.</p>
+          </div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🔓</div>
+          <div>
+            <h4>No Lock-In Contracts</h4>
+            <p>Cancel anytime and keep everything we built. Your website, chatbot, and automations are 100% yours.</p>
+          </div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🇨🇦</div>
+          <div>
+            <h4>Built for Canada</h4>
+            <p>Local SEO, Canadian payment processors, HST compliance. We know this market and optimize for it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="features-visual">
+      <div class="mockup-card fade-in">
+        <div class="mockup-header">
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+        </div>
+        <div class="mockup-stat-row">
+          <div class="mockup-stat">
+            <div class="m-num">347</div>
+            <div class="m-label">Monthly Leads</div>
+            <div class="m-up">↑ 312% vs before</div>
+          </div>
+          <div class="mockup-stat">
+            <div class="m-num">$24k</div>
+            <div class="m-label">Revenue Added</div>
+            <div class="m-up">↑ This Month</div>
+          </div>
+        </div>
+        <div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.75rem;">Traffic by Channel</div>
+        <div class="mockup-bar-row">
+          <div class="mockup-bar-item">
+            <span style="min-width:90px">Google Search</span>
+            <div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:78%"></div></div>
+            <span>78%</span>
+          </div>
+          <div class="mockup-bar-item">
+            <span style="min-width:90px">AI Chatbot</span>
+            <div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:54%;background:linear-gradient(90deg,#34D399,#059669)"></div></div>
+            <span>54%</span>
+          </div>
+          <div class="mockup-bar-item">
+            <span style="min-width:90px">Social</span>
+            <div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:32%;background:linear-gradient(90deg,#F59E0B,#D97706)"></div></div>
+            <span>32%</span>
+          </div>
+          <div class="mockup-bar-item">
+            <span style="min-width:90px">Direct</span>
+            <div class="mockup-bar-track"><div class="mockup-bar-fill" style="width:19%;background:linear-gradient(90deg,#EC4899,#DB2777)"></div></div>
+            <span>19%</span>
+          </div>
+        </div>
+        <div style="margin-top:1.25rem;padding:1rem;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:10px;font-size:0.75rem;color:var(--purple-bright)">
+          🤖 AI Chatbot handled 847 customer queries this month — saving 42 hours of staff time
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="section how-section" id="how">
+  <div class="how-top">
+    <div class="tag">The Process</div>
+    <h2 class="headline">From zero to growing<br/>in 3 steps</h2>
+    <p class="sub">We handle everything. You just show up and approve.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step fade-in">
+      <div class="step-number">01</div>
+      <h3>Free Strategy Call</h3>
+      <p>We learn your business, your goals, and where you're losing money. No pitch — just clarity on what needs to change.</p>
+    </div>
+    <div class="step fade-in">
+      <div class="step-number">02</div>
+      <h3>We Build Everything</h3>
+      <p>Site, chatbot, automation, content — built in 7–14 days. You approve each piece. We handle every technical detail.</p>
+    </div>
+    <div class="step fade-in">
+      <div class="step-number">03</div>
+      <h3>You Start Growing</h3>
+      <p>Go live. Leads come in. We stay on each month to optimize, improve, and push results further.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="section pricing-section" id="pricing">
+  <div class="pricing-top">
+    <div class="tag">Pricing</div>
+    <h2 class="headline">Simple, transparent pricing</h2>
+    <p class="sub">No setup fees. No long contracts. Cancel anytime and keep everything.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card fade-in">
+      <div class="plan-tier">Starter</div>
+      <div class="plan-amount">$299<span>/mo</span></div>
+      <p class="plan-desc">For small businesses ready to get online and start capturing leads.</p>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>5-page professional website</li>
+        <li>AI chatbot (basic responses)</li>
+        <li>8 social posts per month</li>
+        <li>Monthly analytics report</li>
+        <li>Email support</li>
+      </ul>
+      <a href="#contact" class="btn-ghost">Get Started →</a>
+    </div>
+    <div class="price-card featured fade-in">
+      <div class="popular-pill">Most Popular</div>
+      <div class="plan-tier">Growth</div>
+      <div class="plan-amount">$699<span>/mo</span></div>
+      <p class="plan-desc">For businesses serious about growth. Full service, fully automated.</p>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>10-page website + blog</li>
+        <li>Advanced AI chatbot</li>
+        <li>Full business automation</li>
+        <li>20 content pieces/month</li>
+        <li>Local SEO optimization</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#contact" class="btn-primary">Get Started →</a>
+    </div>
+    <div class="price-card fade-in">
+      <div class="plan-tier">Scale</div>
+      <div class="plan-amount">$1,499<span>/mo</span></div>
+      <p class="plan-desc">For ambitious businesses that want the full AI advantage.</p>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>Everything in Growth</li>
+        <li>Custom AI tools built for you</li>
+        <li>Full analytics dashboard</li>
+        <li>Dedicated account manager</li>
+        <li>Unlimited revisions</li>
+        <li>Weekly strategy calls</li>
+      </ul>
+      <a href="#contact" class="btn-ghost">Get Started →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="section testimonials-section" id="testimonials">
+  <div class="testimonials-top">
+    <div class="tag">Client Results</div>
+    <h2 class="headline">Real businesses. Real results.</h2>
+    <p class="sub">Canadian small businesses that stopped leaving money on the table.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Built our website and chatbot in under 2 weeks. We're getting 3x more leads and the bot handles 80% of inquiries automatically. Worth every dollar."</p>
+      <div class="t-author">
+        <div class="t-avatar">JK</div>
+        <div>
+          <div class="t-name">Jason K.</div>
+          <div class="t-role">Plumber · Mississauga, ON</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"They automated our booking and follow-up process completely. I used to spend 2 hours a day on admin. Now it's 10 minutes. Genuinely life-changing."</p>
+      <div class="t-author">
+        <div class="t-avatar">SM</div>
+        <div>
+          <div class="t-name">Sarah M.</div>
+          <div class="t-role">Yoga Studio · Toronto, ON</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Went from page 4 to top 3 on Google in 60 days. The SEO work is incredible. We're fully booked on weekends now — something that never happened before."</p>
+      <div class="t-author">
+        <div class="t-avatar">DL</div>
+        <div>
+          <div class="t-name">David L.</div>
+          <div class="t-role">Restaurant Owner · Vaughan, ON</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="section faq-section" id="faq">
+  <div class="faq-top">
+    <div class="tag">FAQ</div>
+    <h2 class="headline">Questions we get asked</h2>
+    <p class="sub">Everything you need to know before getting started.</p>
+  </div>
+  <div class="faq-inner">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Do I need any technical knowledge?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Zero. We handle everything technical. You tell us your goals and we build it. You get a simple dashboard to manage your tools — no coding required.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How fast will I see results?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Most clients see their first new leads within 7 days of launch. SEO takes 45–90 days for full impact, but we set up immediate-return funnels in parallel so you're not waiting.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What if I want to cancel?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Cancel anytime. No long-term contracts, no cancellation fees. You keep everything we built — the website, chatbot, automations. All 100% yours.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is this built for Canadian businesses specifically?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Yes. We focus exclusively on Canadian small businesses — especially Ontario. Local SEO, Canadian payment processors, HST compliance, Google Maps optimization for your city. We know this market.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How is this different from a regular agency?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Traditional agencies charge $5,000–$30,000 upfront and take months. We're month-to-month, deliver in 7–14 days, and every service is tied to a measurable business outcome. We're your ongoing AI partner, not a one-time project.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What industries do you work with?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Trades (plumbing, HVAC, electrical, roofing), health & wellness, restaurants, professional services (lawyers, accountants, dentists), retail, and real estate. If you serve local customers, we can help.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BLOG ─── -->
+<section class="section blog-section" id="blog">
+  <div class="blog-top">
+    <div>
+      <div class="tag">Resources</div>
+      <h2 class="headline">Insights for Canadian<br/>small businesses</h2>
+    </div>
+    <a href="#contact" class="btn-ghost">All articles →</a>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card fade-in">
+      <div class="blog-label">AI Automation</div>
+      <h3>5 Tasks Every Small Business Should Automate in 2026</h3>
+      <p>Most owners spend 15+ hours a week on repetitive tasks. Here's what to automate first and what it's worth to your bottom line.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+    <div class="blog-card fade-in">
+      <div class="blog-label">Local SEO</div>
+      <h3>How to Show Up #1 on Google Maps in Your City</h3>
+      <p>AI-powered optimization is how Ontario small businesses are beating national franchises in local search without a big budget.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+    <div class="blog-card fade-in">
+      <div class="blog-label">AI Chatbots</div>
+      <h3>Why Your Website Loses Leads at 2am (And How to Fix It)</h3>
+      <p>60% of website visitors arrive outside business hours. An AI chatbot captures and qualifies those leads while you sleep.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA STRIP ─── -->
+<section class="cta-strip">
+  <div class="cta-strip-inner">
+    <div class="tag">Get Started</div>
+    <h2>Stop Watching Competitors<br/>Win Clients You Should Have</h2>
+    <p>Free 30-minute strategy call. We'll show you exactly where you're leaving money on the table and what it takes to fix it.</p>
+    <div class="cta-strip-btns">
+      <a href="#contact" class="btn-primary">Book Free Strategy Call →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="section contact-section" id="contact">
+  <div class="contact-top">
+    <div class="tag">Let's Talk</div>
+    <h2 class="headline">Book your free strategy call</h2>
+    <p class="sub">No pressure. No pitch. Just an honest conversation about your business and where AI can take it.</p>
+  </div>
+  <form class="contact-form-wrap" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <input id="f-name" type="text" placeholder="Your Name" required />
+      <input id="f-email" type="email" placeholder="Email Address" required />
+    </div>
+    <input id="f-business" type="text" placeholder="Business Name" />
+    <select id="f-service">
+      <option value="" disabled selected>What do you need help with?</option>
+      <option>Website Design & Build</option>
+      <option>AI Chatbot</option>
+      <option>Business Automation</option>
+      <option>Content & Copywriting</option>
+      <option>SEO & Local Search</option>
+      <option>Analytics & Insights</option>
+      <option>Everything — let's talk</option>
+    </select>
+    <textarea id="f-message" placeholder="Tell us about your business and what you want to achieve..." rows="4"></textarea>
+    <button type="submit" class="btn-primary" id="submit-btn">Send Message →</button>
+    <p id="form-status"></p>
+  </form>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Momentum<span>AI</span></span>
+      <p>AI-powered growth tools for Canadian small businesses. Built in Ontario. Trusted across the country.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#services">Website Design</a>
+      <a href="#services">AI Chatbots</a>
+      <a href="#services">Automation</a>
+      <a href="#services">SEO & Search</a>
+      <a href="#services">AI Content</a>
+      <a href="#services">Analytics</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#why">Why Us</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#blog">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <a href="mailto:hello@momentumai.ca">hello@momentumai.ca</a>
+      <a href="#contact">Book a Call</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Momentum AI. Toronto, Ontario, Canada.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── CHATBOT ─── -->
+<div id="chat-bubble" onclick="toggleChat()" title="Chat with us">💬</div>
+<div id="chat-window">
+  <div id="chat-header">
+    <span>Momentum AI · Chat</span>
+    <button onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chat-messages">
+    <div class="chat-msg bot">Hey 👋 Ask me about our services, pricing, or how we can help your business.</div>
+  </div>
+  <div id="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()" />
+    <button onclick="sendChat()">→</button>
+  </div>
+</div>
+
+<script>
+  // Scroll animations
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  // Sticky nav bg
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.background = window.scrollY > 20
+      ? 'rgba(0,0,0,0.92)' : 'rgba(0,0,0,0.7)';
+  });
+
+  // Mobile nav
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  toggle.addEventListener('click', () => menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
+  });
 
-    // FAQ
-    function toggleFaq(el) {
-      const item = el.parentElement;
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 
-    // Contact form
-    async function handleSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submit-btn');
-      const status = document.getElementById('form-status');
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
-      try {
-        const res = await fetch('/api/leads', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: document.getElementById('f-name').value,
-            email: document.getElementById('f-email').value,
-            business: document.getElementById('f-business').value,
-            service: document.getElementById('f-service').value,
-            message: document.getElementById('f-message').value
-          })
-        });
-        if (res.ok) {
-          status.textContent = '✅ Got it! We\'ll reach out within 24 hours.';
-          status.style.display = 'block';
-          e.target.reset();
-        } else throw new Error();
-      } catch {
-        status.textContent = '⚠️ Something went wrong. Email us at hello@momentumai.ca';
+  // Contact form
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const status = document.getElementById('form-status');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('f-name').value,
+          email: document.getElementById('f-email').value,
+          business: document.getElementById('f-business').value,
+          service: document.getElementById('f-service').value,
+          message: document.getElementById('f-message').value
+        })
+      });
+      if (res.ok) {
+        status.textContent = '✅ Got it! We\'ll reach out within 24 hours.';
         status.style.display = 'block';
-      }
-      btn.textContent = 'Send Message →';
-      btn.disabled = false;
+        e.target.reset();
+      } else throw new Error();
+    } catch {
+      status.textContent = '⚠️ Something went wrong. Email us at hello@momentumai.ca';
+      status.style.display = 'block';
     }
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }
 
-    // Chatbot
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'flex' ? 'none' : 'flex';
-    }
-    async function sendChat() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      input.value = '';
-      addMsg(msg, 'user');
-      try {
-        const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg }) });
-        const data = await res.json();
-        addMsg(data.reply, 'bot');
-      } catch {
-        addMsg("Sorry, I'm having a connection issue. Try again shortly!", 'bot');
-      }
-    }
-    function addMsg(text, type) {
-      const msgs = document.getElementById('chat-messages');
-      const div = document.createElement('div');
-      div.className = `chat-msg ${type}`;
-      div.textContent = text;
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
-  </script>
+  // Chatbot
+  function toggleChat() {
+    const w = document.getElementById('chat-window');
+    w.style.display = w.style.display === 'flex' ? 'none' : 'flex';
+  }
+  async function sendChat() {
+    const input = document.getElementById('chat-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    addMsg(msg, 'user');
+    try {
+      const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg }) });
+      addMsg((await res.json()).reply, 'bot');
+    } catch { addMsg("Having a connection issue. Try again shortly!", 'bot'); }
+  }
+  function addMsg(text, type) {
+    const msgs = document.getElementById('chat-messages');
+    const d = document.createElement('div');
+    d.className = `chat-msg ${type}`;
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+</script>
 
 </body>
 </html>
